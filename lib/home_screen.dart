@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workout_tracker/auth/auth_service.dart';
 import 'package:workout_tracker/auth/login_screen.dart';
 import 'package:workout_tracker/calculator_screen.dart';
-import 'package:workout_tracker/workouts_screen.dart';
 
 import 'package:workout_tracker/widgets/button.dart';
 import 'package:flutter/material.dart';
