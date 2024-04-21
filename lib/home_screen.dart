@@ -35,13 +35,31 @@ class HomeScreen extends StatelessWidget {
       };
      exercises.add(record);
     }
-
-
   }
   @override
   Widget build(BuildContext context) {
     final auth = AuthService();
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Pro Overload'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.add_alert),
+            tooltip: 'Show Snackbar',
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('This is a snackbar')));
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.navigate_next),
+            tooltip: 'Go to the max calculator',
+            onPressed: () {
+              goToCalculator(context);
+            },
+          ),
+        ],
+      ),
       body: Align(
         alignment: Alignment.center,
         child: Column(
@@ -59,27 +77,45 @@ class HomeScreen extends StatelessWidget {
                 goToLogin(context);
               },
             ),
-            CustomButton(
-              label: "Max Calculator",
-              onPressed: () async {
-                goToCalculator(context);
-              },
+            ElevatedButton(
+              onPressed: exportData,
+              child: Text('Export CSV'),
             ),
-            ElevatedButton(onPressed: exportData,
-                child: Text('Export CSV'))
-
-            // CustomButton(
-            //   label: "Exercise Viewer",
-            //   onPressed: () async{
-            //     goToExercises(context);
-            //   },
-            // )
-
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Color(0xFF6200EE),
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white.withOpacity(.60),
+        selectedFontSize: 14,
+        unselectedFontSize: 14,
+        onTap: (value) {
+          // Respond to item press.
+        },
+        items: [
+          BottomNavigationBarItem(
+            label: 'Dashboard',
+            icon: Icon(Icons.dashboard),
+          ),
+          BottomNavigationBarItem(
+            label: 'Calendar',
+            icon: Icon(Icons.calendar_month),
+          ),
+          BottomNavigationBarItem(
+            label: 'Plans',
+            icon: Icon(Icons.fitness_center),
+          ),
+          BottomNavigationBarItem(
+            label: 'More',
+            icon: Icon(Icons.settings),
+          ),
+        ],
+      ),
     );
   }
+
 
   goToLogin(BuildContext context) =>
       Navigator.push(
